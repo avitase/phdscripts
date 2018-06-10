@@ -1,13 +1,33 @@
 FROM jupyter/scipy-notebook:latest
 
+ARG ROOT_VERSION=v6-13-02
+ARG USERNAME=jovyan
+
 USER root
 RUN apt-get update -yqq && \
-apt-get install -yqq --no-install-recommends gnuplot
+apt-get install -yqq --no-install-recommends apt-utils \
+gnuplot \
+git dpkg-dev cmake g++ gcc binutils \
+ghostscript texlive-font-utils imagemagick && \
+apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+USER ${USERNAME}
 
-USER jovyan
-WORKDIR /home/jovyan/work/
+RUN cd ~ && \
+git clone http://github.com/root-project/root.git && \
+cd root && git checkout -b ${ROOT_VERSION} ${ROOT_VERSION} && \
+cd ~ && mkdir root-build && cd root-build && \
+cmake -Dx11=OFF -Dastiff=OFF -Dbuiltin_afterimage=OFF -Dtmva=OFF ../root && \
+make && \
+cd ~ && rm -r ~/root && mv ~/root-build ~/root
 
-RUN mkdir /home/jovyan/scripts
-COPY gp2png.sh gptools.py /home/jovyan/scripts/
+ENV PATH="$HOME/root/bin:$PATH" \
+LD_LIBRARY_PATH="$HOME/root/lib:$LD_LIBRARY_PATH" \
+PYTHONPATH="$HOME/root/lib:$PYTHONPATH" \
+MANPATH="$HOME/root/man:$MANPATH" \
+CMAKE_PREFIX_PATH="$HOME/root:$CMAKE_PREFIX_PATH" \
+ROOTSYS="$HOME/root:$ROOTSYS"
+
+COPY gp2png.sh gptools.py parula.pal /home/${USERNAME}/work/
+
+WORKDIR /home/${USERNAME}/work/

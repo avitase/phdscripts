@@ -5,7 +5,7 @@ from IPython.display import display, HTML
 size_small = (2.8, 2.1)
 size_medium = (4.0, 3.0)
 
-texmacros = [
+preamble = [
     r'''\newcommand{\mevcc}{\ensuremath{\mathrm{Me\kern -0.1em V\!/}c^2}}''',
     r'''\newcommand{\mevc}{\ensuremath{\mathrm{Me\kern -0.1em V\!/}c}}''',
     r'''\newcommand{\gevcc}{\ensuremath{\mathrm{Ge\kern -0.1em V\!/}c^2}}''',
@@ -14,14 +14,20 @@ texmacros = [
     r'''\newcommand{\MagDown}{\ensuremath{\mathrm{\textit{MagDown}}}}''',
 ]
 
-def create(filename, code, size = size_small):
+def prepend_preamble(cmd):
+    return [cmd, ] + preamble
+
+def append_preamble(cmd):
+    return preamble + [cmd, ]
+
+def create(filename, code, size = size_small, preamble=preamble):
     basename = filename.split('.')[0]
     gpfilename = '{}.{}'.format(basename, 'gp')
     texfilename = '{}.{}'.format(basename, 'tex')
 
     with open(gpfilename, 'w') as f:
         f.write('set terminal epslatex size {}, {} color standalone "" 9 header \'{}\'\n'
-                .format(*size, ' '.join(texmacros)))
+                .format(*size, ' '.join(preamble)))
 
         f.write('set output \'{}\'\n'.format(texfilename))
         f.write('load \'parula.pal\'\n')
