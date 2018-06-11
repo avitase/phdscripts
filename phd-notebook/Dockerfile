@@ -5,11 +5,13 @@ ARG USERNAME=jovyan
 
 USER root
 RUN apt-get update -yqq && \
-apt-get install -yqq --no-install-recommends apt-utils \
+apt-get install -yqq apt-utils
+RUN apt-get install -yqq \
 gnuplot \
 git dpkg-dev cmake g++ gcc binutils \
-ghostscript texlive-font-utils imagemagick && \
-apt-get clean && rm -rf /var/lib/apt/lists/*
+texlive-font-utils texlive-binaries texlive-metapost \
+ghostscript imagemagick
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${USERNAME}
 
