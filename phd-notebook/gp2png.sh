@@ -18,7 +18,7 @@ filename="${filename%.*}"
 
 gnuplot $gpfile
 
-lualatex -interaction=nonstopmode ${filename}.tex # -> pdf
+lualatex -interaction=nonstopmode ${filename}.tex
 if [ "$?" -ne 0 ]; then
   echo Failure
   exit 1
@@ -28,4 +28,4 @@ convert -density 600 -background white -alpha remove -units PixelsPerInch ${file
 
 mkdir -p img
 mv ${filename}.{gp,png} img/
-rm ${filename}*.{aux,tex,eps,pdf,log}
+rm ${filename}{.aux,.tex,-inc.eps,-inc-eps-converted-to.pdf,.log}

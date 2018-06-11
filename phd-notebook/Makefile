@@ -1,9 +1,12 @@
 .PHONY: all clean phd-notebook
 
-all: phd-notebook 
+all: phd-notebook lhcb-symbols-def.tex
 
 clean:
 	docker rmi phd-notebook
+	rm lhcb-symbols-def.tex
 
-phd-notebook: Dockerfile gp2png.sh gptools.py parula.pal
+lhcb-symbols-def.tex
+
+phd-notebook: lhcb-symbols-def.tex
 	docker build --rm -t phd-notebook .
