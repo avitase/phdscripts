@@ -1,0 +1,42 @@
+\begin{fmfgraph*}(80,50)
+    \fmfleft{i1}
+    \fmfright{o1,o2}
+
+    \fmf{fermion,tension=3}{i1,v1}
+    \fmf{fermion,tension=2,label=$\bquark$}{v1,v2}
+    \fmf{fermion,label=$\cquark$}{v2,v3}
+    \fmf{fermion,tension=3}{v3,o2}
+
+    \fmf{fermion,label=$\uquark$,label.side=left}{v3,v4}
+    \fmf{fermion,label=$\squark$}{v4,v5}
+    \fmf{fermion,tension=3}{v5,o1}
+
+    \fmf{fermion}{v1,v5}
+
+    \fmf{boson,tension=2}{v2,v4}
+
+    \fmfdot{v2}
+    \fmfdot{v4}
+
+    \fmfblob{.1w}{v1}
+    \fmfblob{.1w}{v3}
+    \fmfblob{.1w}{v5}
+
+    \fmffreeze
+    \fmfi{plain}{vpath (__i1,__v1) shifted (thick*(0,2))}
+    \fmfi{plain}{vpath (__i1,__v1) shifted (thick*(0,-2))}
+
+    \fmfi{plain}{vpath (__v3,__o2) shifted (thick*(0,-2.5))}
+
+    \fmfi{plain}{vpath (__v1,__v5) shifted (thick*(-.8,-2))}
+
+    \fmfi{plain}{vpath (__v5,__o1) shifted (thick*(0,3))}
+    \fmfi{plain}{vpath (__v5,__o1) shifted (thick*(-1.5,-2))}
+
+    \fmfv{label=$\Vcb$,label.angle=120}{v2}
+    \fmfv{label=$\Vuss$,label.angle=-120}{v4}
+
+    \fmfv{label=$\Lb$,label.angle=-120,label.dist=0.06w}{v1}
+    \fmfv{label=$\Lz$,label.angle=-120,label.dist=0.06w}{v5}
+    \fmfv{label=$\Dz$,label.angle=-30,label.dist=0.06w}{v3}
+\end{fmfgraph*}

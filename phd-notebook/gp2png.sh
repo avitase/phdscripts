@@ -28,4 +28,4 @@ convert -density 600 -background white -alpha remove -units PixelsPerInch ${file
 
 mkdir -p img
 mv ${filename}.{gp,png} img/
-rm ${filename}{.aux,.tex,-inc.eps,-inc-eps-converted-to.pdf,.log}
+rm ${filename}{.aux,.tex,-inc.eps,.pdf,-inc-eps-converted-to.pdf,.log}

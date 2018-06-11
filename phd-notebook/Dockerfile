@@ -30,7 +30,7 @@ MANPATH="$HOME/root/man:$MANPATH" \
 CMAKE_PREFIX_PATH="$HOME/root:$CMAKE_PREFIX_PATH" \
 ROOTSYS="$HOME/root:$ROOTSYS"
 
-COPY gp2png.sh gptools.py parula.pal lhcb-symbols-def.tex \
+COPY gp2png.sh gptools.py parula.pal feyn2png.sh feynhead.tex lhcb-symbols-def.tex \
 test.ipynb testDecay.tex \
 /home/${USERNAME}/work/
 
