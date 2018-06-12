@@ -1,7 +1,3 @@
-import time
-import os
-from IPython.display import display, HTML
-
 size_small = (2.8, 2.1)
 size_medium = (4.0, 3.0)
 
@@ -35,9 +31,3 @@ def create(filename, code, size = size_small, preamble=preamble):
         f.write(code.strip())
 
     return './gp2png.sh {} {}'.format(gpfilename, texfilename)
-
-def show_fig(filename, directory = 'img', width = 400):
-    html_template = '<img src="{0}?{1}" alt="{0}" width="{2}">'
-    rnd = time.time() # fool caching
-    fullname = os.path.join(directory, filename)
-    display(HTML(html_template.format(fullname, rnd, width)))
