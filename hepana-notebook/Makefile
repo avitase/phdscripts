@@ -10,4 +10,4 @@ lhcb-symbols-def.tex:
 	wget https://raw.githubusercontent.com/avitase/phdscripts/master/lhcb-symbols-def.tex
 
 phd-notebook: lhcb-symbols-def.tex
-	docker build --rm -t phd-notebook .
+	docker build --rm -t hepana-notebook .
