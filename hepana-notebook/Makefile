@@ -1,6 +1,6 @@
-.PHONY: all clean phd-notebook
+.PHONY: all clean notebook
 
-all: phd-notebook lhcb-symbols-def.tex
+all: notebook lhcb-symbols-def.tex
 
 clean:
 	docker rmi phd-notebook
@@ -9,5 +9,5 @@ clean:
 lhcb-symbols-def.tex:
 	wget https://raw.githubusercontent.com/avitase/phdscripts/master/lhcb-symbols-def.tex
 
-phd-notebook: lhcb-symbols-def.tex
-	docker build --rm -t hepana-notebook .
+notebook: lhcb-symbols-def.tex
+	docker build --rm -t avitase/hepana-notebook:latest .
