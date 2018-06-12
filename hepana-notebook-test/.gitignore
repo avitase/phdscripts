@@ -1,0 +1,8 @@
+__pycache__/
+.ipynb_checkpoints/
+
+img/testPlot.gp
+img/testPlot.png
+img/testDecay.png
+
+notebook.sh

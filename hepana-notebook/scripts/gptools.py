@@ -26,8 +26,8 @@ def create(filename, code, size = size_small, preamble=preamble):
                 .format(*size, ' '.join(preamble)))
 
         f.write('set output \'{}\'\n'.format(texfilename))
-        f.write('load \'parula.pal\'\n')
+        f.write('load \'../scripts/parula.pal\'\n')
         f.write('set datafile separator \',\'\n\n')
         f.write(code.strip())
 
-    return './gp2png.sh {} {}'.format(gpfilename, texfilename)
+    return 'gp2png.sh {} {}'.format(gpfilename, texfilename)

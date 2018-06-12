@@ -30,8 +30,10 @@ MANPATH="$HOME/root/man:$MANPATH" \
 CMAKE_PREFIX_PATH="$HOME/root:$CMAKE_PREFIX_PATH" \
 ROOTSYS="$HOME/root:$ROOTSYS"
 
-COPY gp2png.sh gptools.py parula.pal feyn2png.sh feynhead.tex lhcb-symbols-def.tex \
-test.ipynb testDecay.tex \
-/home/${USERNAME}/work/
+RUN mkdir -p $HOME/scripts
+COPY --chown=jovyan:users scripts/* ${HOME}/scripts/
+ENV PATH="$HOME/scripts:$PATH" \
+PYTHONPATH="$HOME/scripts:$PYTHONPATH" \
+TEXINPUTS="$HOME/scripts:$TEXINPUTS"
 
-WORKDIR /home/${USERNAME}/work/
+WORKDIR ${HOME}/work/

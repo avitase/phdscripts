@@ -13,7 +13,7 @@ if [ ! -f $textemp ]; then
     exit 1
 fi
 
-cp feynhead.tex $texfile
+cp $HOME/scripts/feynhead.tex $texfile
 cat $textemp >> $texfile
 echo "\\end{fmffile}" >> $texfile
 echo "\\end{document}" >> $texfile
