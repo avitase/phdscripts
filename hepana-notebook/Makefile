@@ -4,10 +4,9 @@ all: notebook
 
 clean:
 	docker rmi phd-notebook
-	rm lhcb-symbols-def.tex
 
-scripts/lhcb-symbols-def.tex:
-	wget -P scripts/ https://raw.githubusercontent.com/avitase/phdscripts/master/lhcb-symbols-def.tex
+scripts/lhcb-symbols-def.tex: ../lhcb-symbols-def.tex
+	cp ../lhcb-symbols-def.tex scripts/
 
 notebook: scripts/lhcb-symbols-def.tex
-	docker build --rm -t hepana-notebook .
+	docker build --rm -t hepana-notebook:local .
