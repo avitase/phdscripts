@@ -17,11 +17,6 @@ notebook: scripts/lhcb-symbols-def.tex
 
 push: notebook
 	if ! docker info 2>&- | grep -q "Username: $(DOCKER_USER)"; then \
-		echo -e "\n#####################################"; \
-		echo -e "############             ############"; \
-		echo -e "############  ATTENTION  ############"; \
-		echo -e "############             ############"; \
-		echo -e "#####################################"; \
 		echo -e "\nApparently, you are not login ..."; \
 		echo "Username: $(DOCKER_USER)"; \
 		docker login --username $(DOCKER_USER); \
