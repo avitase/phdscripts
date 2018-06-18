@@ -16,18 +16,23 @@ def prepend_preamble(cmd):
 def append_preamble(cmd):
     return preamble + [cmd, ]
 
-def create(filename, code, size = size_small, preamble=preamble):
+def create(filename, code, size = size_small, preamble=preamble, monochrome=True):
     basename = filename.split('.')[0]
     gpfilename = '{}.{}'.format(basename, 'gp')
     texfilename = '{}.{}'.format(basename, 'tex')
 
     with open(gpfilename, 'w') as f:
-        f.write('set terminal epslatex size {}, {} color standalone "" 9 header \'{}\'\n'
-                .format(*size, ' '.join(preamble)))
+        color_type = 'monochrome' if monochrome else 'color'
+        f.write('set terminal epslatex size {}, {} {} standalone "" 9 header \'{}\'\n'
+                .format(*size, color_type, ' '.join(preamble)))
 
         f.write('set output \'{}\'\n'.format(texfilename))
         f.write('load \'../scripts/parula.pal\'\n')
         f.write('set datafile separator \',\'\n\n')
+
+        macros = '/home/jovyan/scripts'
+        f.write('set macros\nset loadpath \'{}\'\n\n'.format(macros))
+
         f.write(code.strip())
 
-    return 'gp2png.sh {} {}'.format(gpfilename, texfilename)
+    return 'gp2png.sh {} {} {}'.format(gpfilename, texfilename, color_type)

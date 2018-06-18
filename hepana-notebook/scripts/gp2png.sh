@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" -ne 2 ]; then
-  echo Usage $0 [script.gp] [img.tex]
+if [ "$#" -lt 2 ]; then
+  echo Usage $0 [script.gp] [img.tex] [monochrome|color]
   exit 1
 fi
 
@@ -24,7 +24,10 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-convert -density 600 -background white -alpha remove -units PixelsPerInch ${filename}.pdf ${filename}.png
+if [ "$#" -eq 3 ] && [ "$3" == "monochrome" ]; then
+    colortype=-monochrome
+fi
+convert ${colortype} -density 600 -background white -alpha remove -units PixelsPerInch ${filename}.pdf ${filename}.png
 
 mkdir -p img
 mv ${filename}.{gp,png} img/
