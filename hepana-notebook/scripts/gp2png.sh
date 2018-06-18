@@ -5,6 +5,8 @@ if [ "$#" -lt 2 ]; then
   exit 1
 fi
 
+mkdir -p img && cd img/
+
 if [ ! -f "$1" ]; then
   echo Error: File \'$1\' does not exists.
   exit 1
@@ -29,6 +31,4 @@ if [ "$#" -eq 3 ] && [ "$3" == "monochrome" ]; then
 fi
 convert ${colortype} -density 600 -background white -alpha remove -units PixelsPerInch ${filename}.pdf ${filename}.png
 
-mkdir -p img
-mv ${filename}.{gp,png} img/
 rm ${filename}{.aux,.tex,-inc.eps,.pdf,-inc-eps-converted-to.pdf,.log}
