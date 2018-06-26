@@ -30,6 +30,8 @@ MANPATH="$HOME/root/man:$MANPATH" \
 CMAKE_PREFIX_PATH="$HOME/root:$CMAKE_PREFIX_PATH" \
 ROOTSYS="$HOME/root:$ROOTSYS"
 
+RUN pip install --upgrade pip && pip install uncertainties
+
 RUN mkdir -p $HOME/scripts
 COPY --chown=jovyan:users scripts/* ${HOME}/scripts/
 ENV PATH="$HOME/scripts:$PATH" \
