@@ -29,3 +29,17 @@ def make_hist_file(data, bin_edges, file_name, error_fct=poisson_interval):
             values = bin_edge[0], bin_center, bin_edge[1], error_low, n, error_up
             f.write(row_temp.format(*values) + '\n')
 
+def make_steps_file(func, bin_edges, file_name, n=100):
+    file_name = os.path.join('img', file_name)
+    columns = ['left edge', 'height']
+    with open(file_name, 'w') as f:
+        f.write(','.join(['\"{}\"'.format(x) for x in columns]) + '\n')
+        row_temp = ','.join(['{:.5g}',] * len(columns))
+
+        height = 0.
+        for i in range(len(bin_edges) - 1):
+            l, r = bin_edges[i:i+2]
+            xs = [l + (r-l) * float(i) / float(n-1) for i in range(n)]
+            height = sum([func(x) / float(n) for x in xs])
+            f.write(row_temp.format(l, height) + '\n')
+        f.write(row_temp.format(bin_edges[-1], height))
