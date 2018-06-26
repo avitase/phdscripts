@@ -19,7 +19,7 @@ RUN cd ~ && \
 git clone http://github.com/root-project/root.git && \
 cd root && git checkout -b ${ROOT_VERSION} ${ROOT_VERSION} && \
 cd ~ && mkdir root-build && cd root-build && \
-cmake -Dx11=OFF -Dastiff=OFF -Dbuiltin_afterimage=OFF -Dtmva=OFF ../root && \
+cmake -Dx11=OFF -Dastiff=OFF -Dbuiltin_afterimage=OFF -Dtmva=OFF -Droofit=OFF ../root && \
 make && \
 cd ~ && rm -r ~/root && mv ~/root-build ~/root
 
