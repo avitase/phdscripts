@@ -11,7 +11,7 @@ def make_hist_file(data, bin_edges, file_name, error_fct=poisson_interval):
     hist, bin_edges = np.histogram(data, bin_edges)
     dump_hist(hist, bin_edges, file_name, error_fct)
 
-def dump_hist(hist, file_name, error_fct=poisson_interval):
+def dump_hist(hist, bin_edges, file_name, error_fct=poisson_interval):
     file_name = os.path.join('img', file_name)
 
     columns = ['lower bin edge', 'bin center', 'upper bin edge',
