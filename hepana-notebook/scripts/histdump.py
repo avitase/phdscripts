@@ -8,9 +8,11 @@ def poisson_interval(k, alpha=2.*0.159):
     return low, high
 
 def make_hist_file(data, bin_edges, file_name, error_fct=poisson_interval):
-    file_name = os.path.join('img', file_name)
-
     hist, bin_edges = np.histogram(data, bin_edges)
+    dump_hist(hist, bin_edges, file_name, error_fct)
+
+def dump_hist(hist, file_name, error_fct=poisson_interval):
+    file_name = os.path.join('img', file_name)
 
     columns = ['lower bin edge', 'bin center', 'upper bin edge',
                'lower error', 'bin content', 'upper error']
@@ -24,7 +26,7 @@ def make_hist_file(data, bin_edges, file_name, error_fct=poisson_interval):
             bin_center = np.mean(bin_edge)
             i = i + 1
 
-            error_low, error_up = error_fct(n)
+            error_low, error_up = error_fct(n) if error_fct else 0., 0.
 
             values = bin_edge[0], bin_center, bin_edge[1], error_low, n, error_up
             f.write(row_temp.format(*values) + '\n')
