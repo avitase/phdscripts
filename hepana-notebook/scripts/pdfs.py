@@ -27,7 +27,7 @@ class Gaussian:
     
     def __call__(self, x, mean, width):
         l, r = self.boundaries
-        tx, tr, rl = [self.t(y) for y in [x, r, l]]
+        tx, tr, rl = [self._t(y) for y in [x, r, l]]
 
         norm = self.SQRTPI / self.SQRT2 * width
         norm *= erf(tr) - erf(tl)
@@ -36,5 +36,5 @@ class Gaussian:
 
     def integral(self, x):
         l, r = self.boundaries
-        tx, tr, rl = [self.t(y) for y in [x, r, l]]
+        tx, tr, rl = [self._t(y) for y in [x, r, l]]
         return erf(tx) / (erf(tr) - erf(tl))
