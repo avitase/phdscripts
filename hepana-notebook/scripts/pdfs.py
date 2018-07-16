@@ -27,10 +27,11 @@ class Gaussian:
     
     def __call__(self, x, mean, width):
         l, r = self.boundaries
+        tx, tr, rl = [self.t(y) for y in [x, r, l]]
+
         norm = self.SQRTPI / self.SQRT2 * width
-        norm *= erf(_t(r)) - erf(_t(l))
+        norm *= erf(tr) - erf(tl)
         
-        tx = self._t(x)
         return exp(-tx * tx) / norm
 
     def integral(self, x):
