@@ -63,7 +63,7 @@ class Fitter:
             self.print_value(idx=i, prefix_idx=True)
 
 def logl(ln_f, data):
-    return -sum([ln_f(x) for x in data])
+    return sum([ln_f(x) for x in data])
 
 def extended_logl(ln_f, n, data):
     return logl(ln_f, data) - (len(data) * math.log(n) - n)
