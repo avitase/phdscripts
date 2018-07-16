@@ -9,10 +9,10 @@ class Linear:
         return a / 2. * (r**2 - l**2) + r - l
     
     def __call__(self, x, a):
-        return (1. + a * x) / _norm(a)
+        return (1. + a * x) / self._norm(a)
 
     def integral(self, x):
-        return (x + a / 2. * x**2) / _norm(a)
+        return (x + a / 2. * x**2) / self._norm(a)
 
 
 class Gaussian:
@@ -30,9 +30,10 @@ class Gaussian:
         norm = self.SQRTPI / self.SQRT2 * width
         norm *= erf(_t(r)) - erf(_t(l))
         
-        tx = _t(x)
+        tx = self._t(x)
         return exp(-tx * tx) / norm
 
     def integral(self, x):
         l, r = self.boundaries
-        return erf(_t(x)) / (erf(_t(r)) - erf(_t(l)))
+        tx, tr, rl = [self.t(y) for y in [x, r, l]]
+        return erf(tx) / (erf(tr) - erf(tl))
