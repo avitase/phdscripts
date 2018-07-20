@@ -13,7 +13,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${USERNAME}
 
-RUN pip install --upgrade pip && pip install uncertainties iminuit
+RUN pip install --upgrade pip && pip install \
+uncertainties iminuit sympy
 
 RUN mkdir -p $HOME/scripts
 COPY --chown=jovyan:users scripts/* ${HOME}/scripts/
