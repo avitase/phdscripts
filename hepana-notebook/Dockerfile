@@ -16,6 +16,11 @@ USER ${USERNAME}
 RUN pip install --upgrade pip && pip install \
 uncertainties iminuit sympy
 
+RUN conda update conda && \
+conda install -c conda-forge jupyter_nbextensions_configurator && \
+conda install -c conda-forge jupyter_contrib_nbextensions
+RUN jupyter nbextension enable spellchecker/main
+
 RUN mkdir -p $HOME/scripts
 COPY --chown=jovyan:users scripts/* ${HOME}/scripts/
 ENV PATH="$HOME/scripts:$PATH" \
