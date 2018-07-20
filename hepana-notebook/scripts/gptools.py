@@ -23,17 +23,17 @@ def prepend_preamble(cmd):
 def append_preamble(cmd):
     return preamble + [cmd, ]
 
-def create(filename, code, size=size_small, preamble=preamble, monochrome=True):
-    basename = filename.split('.')[0]
-    gpfilename = '{}.{}'.format(basename, 'gp')
-    texfilename = '{}.{}'.format(basename, 'tex')
+def create(file_name, code, size=size_small, preamble=preamble, monochrome=True):
+    basename = file_name.split('.')[0]
+    gpfile_name = '{}.{}'.format(basename, 'gp')
+    texfile_name = '{}.{}'.format(basename, 'tex')
 
-    with open(os.path.join('img', gpfilename), 'w') as f:
+    with open(os.path.join('img', gpfile_name), 'w') as f:
         color_type = 'monochrome' if monochrome else 'color'
         f.write('set terminal epslatex size {}, {} {} standalone "" 9 header \'{}\'\n'
                 .format(*size, color_type, ' '.join(preamble)))
 
-        f.write('set output \'{}\'\n'.format(texfilename))
+        f.write('set output \'{}\'\n'.format(texfile_name))
         f.write('load \'/home/jovyan/scripts/parula.pal\'\n')
         f.write('set datafile separator \',\'\n\n')
 
@@ -42,4 +42,4 @@ def create(filename, code, size=size_small, preamble=preamble, monochrome=True):
 
         f.write(code.strip())
 
-    return 'gp2png.sh {} {} {}'.format(gpfilename, texfilename, color_type)
+    return 'gp2png.sh {} {} {}'.format(gpfile_name, texfile_name, color_type)
