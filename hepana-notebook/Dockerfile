@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:03b897d05f16
+FROM jupyter/scipy-notebook:latest
 
 ARG USERNAME=jovyan
 
@@ -7,7 +7,7 @@ RUN apt-get update -yqq && \
 apt-get install -yqq apt-utils
 RUN apt-get install -yqq \
 gnuplot \
-texlive-font-utils texlive-binaries texlive-metapost \
+texlive-full \
 ghostscript imagemagick
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
