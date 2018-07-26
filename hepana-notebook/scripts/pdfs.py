@@ -11,7 +11,7 @@ class Linear:
     def __call__(self, x, a):
         return (1. + a * x) / self._norm(a)
 
-    def integral(self, x):
+    def integral(self, x, a):
         return (x + a / 2. * x**2) / self._norm(a)
 
 
