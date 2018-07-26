@@ -10,7 +10,8 @@ class Linear:
 
     def __call__(self, x, a):
         arg = self._x_to_arg(x)
-        return (1. + a * arg) / 2.
+        norm = self.boundaries[1] - self.boundaries[0]
+        return (1. + a * arg) / norm
 
     def integral(self, x, a):
         arg = self._x_to_arg(x)
