@@ -4,15 +4,17 @@ class Linear:
     def __init__(self, boundaries):
         self.boundaries = boundaries
 
-    def _norm(self, a):
+    def _x_to_arg(self, x):
         l, r = self.boundaries
-        return a / 2. * (r**2 - l**2) + r - l
-    
+        return 2. * (x - l) / (r - l) - 1.
+
     def __call__(self, x, a):
-        return (1. + a * x) / self._norm(a)
+        arg = self._x_to_arg(x)
+        return (1. + a * arg) / 2.
 
     def integral(self, x, a):
-        return (x + a / 2. * x**2) / self._norm(a)
+        arg = self._x_to_arg(x)
+        return (arg + a / 2. * arg**2) / 2.
 
 
 class Gaussian:
