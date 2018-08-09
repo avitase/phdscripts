@@ -33,6 +33,25 @@ def dump_hist(hist, bin_edges, file_name, error_fct=poisson_interval, errors=[])
             values = bin_edge[0], bin_center, bin_edge[1], error_low, n, error_up
             f.write(row_temp.format(*values) + '\n')
 
+def dump_hist2d(hist, xbin_edges, ybin_edges, file_name):
+    file_name = os.path.join('img', file_name)
+
+    columns = ['x', 'y', 'xlow', 'xhigh', 'ylow', 'yhigh', 'n']
+    with open(file_name, 'w') as f:
+        f.write(','.join(['\"{}\"'.format(x) for x in columns]) + '\n')
+
+        row_temp = ','.join(['{:.5g}',] * len(columns))
+
+        for j in range(len(ybin_edges)-1):
+            for i in range(len(xbin_edges)-1):
+                x_low, x_high = xbin_edges[i:i+2]
+                y_low, y_high = ybin_edges[j:j+2]
+                x = (x_low + x_high) / 2.
+                y = (y_low + y_high) / 2.
+                n = hist[i][j]
+                values = x, y, x_low, x_high, y_low, y_high, n
+                f.write(row_temp.format(*values) + '\n')
+
 def make_hist_file(data, bin_edges, file_name, error_fct=poisson_interval, errors=[]):
     hist, bin_edges = np.histogram(data, bin_edges)
     dump_hist(hist, bin_edges, file_name, error_fct, errors)
