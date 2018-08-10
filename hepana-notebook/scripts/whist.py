@@ -26,7 +26,6 @@ class WHist:
         n = self.dim
         find_bin = lambda n, bin_edges: bisect(bin_edges, n)
         bin_idxs = [find_bin(x[i], self._bin_edges[i]) for i in range(n)]
-        print(bin_idxs)
 
         is_valid = lambda bin_idx, n_bins: bin_idx > 0 and bin_idx <= n_bins
         n_bins = lambda i: len(self._bin_edges[i]) - 1
