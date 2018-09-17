@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -lt 2 ]; then
-  echo Usage $0 [script.gp] [img.tex] [monochrome|color]
+  echo "Usage $0 [script.gp] [img.tex] [monochrome|color]"
   exit 1
 fi
 
