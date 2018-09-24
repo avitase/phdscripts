@@ -20,6 +20,7 @@ echo "\\end{document}" >> $texfile
 
 latex -interaction=nonstopmode $texfile
 if [ $? -ne 0 ]; then
+    rm -f ${texfile%.*}.{aux,dvi,log,pdf} $texfile
     exit 1
 fi
 
@@ -31,10 +32,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-convert -monochrome -density 600 -units PixelsPerInch ${texfile%.*}.pdf ${textemp%.*}.png
+convert -monochrome -density 600 -units -trim PixelsPerInch ${texfile%.*}.pdf ${textemp%.*}.png
 
-rm ${texfile%.*}.{aux,dvi,log,pdf} $texfile
-for f in $mps; do rm ${f%.*}.{1,t1,log,mp}; done
+rm -f ${texfile%.*}.{aux,dvi,log,pdf} $texfile
+for f in $mps; do rm -f ${f%.*}.{1,t1,log,mp}; done
 
 mkdir -p img
 mv ${textemp%.*}.png img/
