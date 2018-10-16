@@ -29,6 +29,6 @@ fi
 if [ "$#" -eq 3 ] && [ "$3" == "monochrome" ]; then
     colortype=-monochrome
 fi
-convert ${colortype} -density 600 -background white -alpha remove -units PixelsPerInch -define profile:skip=ICC ${filename}.pdf ${filename}.png
+convert ${colortype} -density 600 -background white -alpha remove -units PixelsPerInch -define profile:skip=ICC -define png:exclude-chunks=date,time ${filename}.pdf ${filename}.png
 
 rm ${filename}{.aux,.tex,-inc.eps,.pdf,-inc-eps-converted-to.pdf,.log}
